@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#FAF6EB">
+  <title>出國行李清單</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Serif+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <svg class="svg-sprite" aria-hidden="true" focusable="false" width="0" height="0">
+    <defs>
+      <symbol id="ico-cloud-sm" viewBox="0 0 60 30">
+        <path d="M8,22 C8,16 12,13 17,14 C18,9 24,7 28,10 C31,6 38,7 40,12 C47,11 52,15 52,21 C52,25 48,27 44,27 L14,27 C10,27 8,25 8,22 Z" fill="currentColor"/>
+      </symbol>
+      <symbol id="ico-cloud-lg" viewBox="0 0 120 60">
+        <path d="M15,45 C15,32 25,28 35,30 C37,20 48,18 55,23 C60,15 73,16 78,25 C95,22 105,32 105,44 C105,52 98,56 90,56 L25,56 C18,56 15,52 15,45 Z" fill="currentColor"/>
+      </symbol>
+      <symbol id="ico-feather" viewBox="0 0 20 30">
+        <path d="M10,2 C5,8 4,18 6,27 C7,28 8,28 9,27 C11,20 12,12 10,2 Z" fill="currentColor" opacity="0.9"/>
+        <path d="M9,8 L7,10 M9,12 L6,14 M9,16 L5,18 M9,20 L6,22" stroke="#2A2E33" stroke-width="0.5" fill="none" opacity="0.4"/>
+      </symbol>
+      <symbol id="ico-plane" viewBox="0 0 32 24">
+        <path d="M2,12 L30,3 L20,22 L16,15 L2,12 Z" fill="#FFFCF4" stroke="#2A2E33" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M16,15 L30,3" stroke="#2A2E33" stroke-width="1" fill="none"/>
+      </symbol>
+      <symbol id="ico-stamp-urgent" viewBox="0 0 90 40">
+        <rect x="2" y="2" width="86" height="36" rx="4" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4,2"/>
+        <text x="45" y="26" text-anchor="middle" font-family="'LXGW WenKai TC', serif" font-size="17" font-weight="700" fill="currentColor" letter-spacing="2">URGENT</text>
+      </symbol>
+      <symbol id="ico-tape-corner" viewBox="0 0 40 40">
+        <path d="M0,0 L38,0 L0,38 Z" fill="currentColor" opacity="0.55"/>
+        <path d="M0,0 L38,0 L0,38" fill="none" stroke="currentColor" stroke-width="1" opacity="0.25"/>
+      </symbol>
+      <symbol id="ico-check" viewBox="0 0 16 12">
+        <path d="M2,6 Q3.5,7.5 6,10 Q9,5 14,2" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </symbol>
+      <symbol id="ico-close" viewBox="0 0 20 20">
+        <path d="M5,5 Q10,9 15,15" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M15,5 Q10,9 5,15" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+      </symbol>
+      <symbol id="ico-underline" viewBox="0 0 120 8">
+        <path d="M2,4 Q22,1 42,4 T82,4 T118,4" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+      </symbol>
+    </defs>
+  </svg>
+  <header class="app-header">
+    <div class="header-clouds" aria-hidden="true">
+      <svg class="header-cloud cloud-a"><use href="#ico-cloud-lg"/></svg>
+      <svg class="header-cloud cloud-b"><use href="#ico-cloud-sm"/></svg>
+      <svg class="header-cloud cloud-c"><use href="#ico-cloud-sm"/></svg>
+    </div>
+    <div class="header-inner">
+      <h1 class="app-title">
+        <span class="app-title-text">出國行李清單</span>
+        <svg class="app-title-underline" aria-hidden="true"><use href="#ico-underline"/></svg>
+      </h1>
+      <div class="header-actions">
+        <button id="btn-final-check" class="icon-btn" aria-label="最終檢查" title="最終檢查">
+          <i data-lucide="shield-check"></i>
+        </button>
+        <button id="btn-edit" class="icon-btn" aria-label="管理分類" title="管理分類">
+          <i data-lucide="pencil"></i>
+        </button>
+        <button id="btn-reset" class="icon-btn" aria-label="重設勾選" title="重設勾選">
+          <i data-lucide="rotate-ccw"></i>
+        </button>
+      </div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-track">
+        <div id="progress-fill" class="progress-fill">
+          <svg class="progress-plane" aria-hidden="true"><use href="#ico-plane"/></svg>
+        </div>
+      </div>
+      <span id="progress-text" class="progress-text">0 / 0</span>
+    </div>
+    <div id="final-check-banner" class="final-check-banner" hidden>
+      <i data-lucide="shield-check"></i>
+      <span class="banner-text">最終檢查模式 · 勾滿所有重要項目即可退出</span>
+      <button id="btn-final-exit" type="button" class="banner-exit">結束</button>
+    </div>
+  </header>
+
+  <main id="board" class="board"></main>
+
+  <div id="modal-manage-categories" class="modal modal-flush" hidden>
+    <div class="modal-card modal-full">
+      <div class="modal-header">
+        <h2 class="modal-title">管理分類</h2>
+        <button id="btn-manage-close" class="modal-close" type="button" aria-label="關閉">
+          <svg class="ico-close-svg" aria-hidden="true"><use href="#ico-close"/></svg>
+        </button>
+      </div>
+      <div id="manage-list" class="edit-list"></div>
+      <button id="btn-manage-add" class="add-row-btn" type="button">＋ 新增分類</button>
+    </div>
+  </div>
+
+  <div id="modal-edit-items" class="modal modal-flush" hidden>
+    <div class="modal-card modal-full">
+      <div class="modal-header">
+        <h2 id="item-edit-title" class="modal-title">編輯項目</h2>
+        <button id="btn-item-edit-close" class="modal-close" type="button" aria-label="關閉">
+          <svg class="ico-close-svg" aria-hidden="true"><use href="#ico-close"/></svg>
+        </button>
+      </div>
+      <div id="item-edit-list" class="edit-list"></div>
+      <button id="btn-item-add" class="add-row-btn" type="button">＋ 新增項目</button>
+    </div>
+  </div>
+
+  <div id="modal-add-category" class="modal" hidden>
+    <div class="modal-card">
+      <h2 class="modal-title">新增分類</h2>
+      <div class="modal-label">
+        <span>圖示</span>
+        <div id="icon-grid" class="icon-grid"></div>
+      </div>
+      <label class="modal-label">
+        <span>名稱</span>
+        <input id="input-cat-name" type="text" placeholder="例：登山裝備" class="modal-input">
+      </label>
+      <div class="modal-actions">
+        <button id="btn-cat-cancel" class="btn-ghost">取消</button>
+        <button id="btn-cat-confirm" class="btn-primary">新增</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
+  <script src="default-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

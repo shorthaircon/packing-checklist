@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>重要標記樣式預覽</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Serif+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper-bg: #FAF6EB;
+    --paper-fold: #F3EBD8;
+    --card-bg: #FFFCF4;
+    --ink: #2A2E33;
+    --ink-faint: #8B8578;
+    --sun: #F4C869;
+    --leaf: #6B9B6E;
+    --sunset: #C85C5C;
+    --border-soft: #E8DFC9;
+    --font-hand: 'LXGW WenKai TC', serif;
+    --font-serif: 'Noto Serif TC', serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper-bg);
+    color: var(--ink);
+    padding: 24px 16px 100px;
+    font-family: var(--font-serif);
+    min-height: 100vh;
+  }
+  .page-title {
+    text-align: center;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 18px;
+    color: var(--ink-faint);
+    margin-bottom: 24px;
+    letter-spacing: 2px;
+  }
+  .preview-grid {
+    display: grid;
+    gap: 28px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  @media (min-width: 960px) {
+    .preview-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .sample {
+    background: transparent;
+    padding: 20px 4px 0;
+  }
+  .sample-label {
+    display: inline-block;
+    background: var(--sun);
+    color: var(--ink);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .sample-desc {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--ink-faint);
+    margin-bottom: 18px;
+    line-height: 1.7;
+  }
+
+  /* ===== 共用卡片 ===== */
+  .demo-card {
+    position: relative;
+    background: var(--card-bg);
+    border: 2px dashed var(--sunset);
+    border-radius: 18px;
+    padding: 18px 18px 14px;
+    box-shadow: 0 2px 10px rgba(120, 90, 50, 0.10);
+    transform: rotate(-0.4deg);
+  }
+  /* 膠帶裝飾（與主 app 一致） */
+  .demo-card::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 24px;
+    width: 60px;
+    height: 16px;
+    background: rgba(244, 200, 105, 0.7);
+    transform: rotate(-4deg);
+    border-radius: 2px;
+  }
+  .cat-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-hand);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--sunset);
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--border-soft);
+    margin-bottom: 10px;
+  }
+  .cat-icon {
+    width: 22px;
+    height: 22px;
+    color: var(--sunset);
+  }
+  .cat-count {
+    margin-left: auto;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--ink-faint);
+    font-weight: 400;
+  }
+  .cat-pencil {
+    color: var(--ink-faint);
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+  }
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    font-size: 15px;
+  }
+  .box {
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid var(--ink-faint);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ========== A. 左上角紅色書籤飄帶 ========== */
+  .mark-a {
+    position: absolute;
+    top: -4px;
+    left: -6px;
+    width: 38px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #D46A6A, #B64848);
+    color: #FFF8EC;
+    font-family: var(--font-hand);
+    font-size: 22px;
+    font-weight: 700;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);
+    box-shadow: 2px 2px 4px rgba(120, 60, 40, 0.25);
+    transform: rotate(-4deg);
+    padding-top: 6px;
+    letter-spacing: 0;
+  }
+  .mark-a::after {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+  }
+
+  /* 樣式 A 使用版：移除 dashed 邊框改成細實線，避免雙紅重疊 */
+  .sample-a .demo-card {
+    border: 1px solid var(--border-soft);
+  }
+
+  /* ========== B. 標題左側警告徽章 ========== */
+  .mark-b {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--sunset);
+    color: #FFF8EC;
+    font-family: var(--font-hand);
+    font-size: 18px;
+    font-weight: 700;
+    flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(200, 92, 92, 0.35);
+  }
+
+  /* 樣式 B 的標題換位：徽章在前、無角落印章 */
+
+  /* ========== C. 右上角圓形印章（中文） ========== */
+  .mark-c {
+    position: absolute;
+    top: -12px;
+    right: -10px;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: 2.5px solid var(--sunset);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 252, 244, 0.6);
+    color: var(--sunset);
+    font-family: var(--font-hand);
+    font-size: 26px;
+    font-weight: 700;
+    transform: rotate(14deg);
+    box-shadow: 0 2px 6px rgba(200, 92, 92, 0.2);
+    letter-spacing: 1px;
+  }
+  .mark-c::before {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    border: 1px solid var(--sunset);
+    border-radius: 50%;
+    opacity: 0.6;
+  }
+
+  .nav-back {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--ink);
+    color: var(--paper-bg);
+    text-decoration: none;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  }
+  .nav-back + .nav-back { right: 20px; left: auto; transform: none; }
+</style>
+</head>
+<body>
+  <h1 class="page-title">重要分類標記樣式 · 3 選 1</h1>
+
+  <div class="preview-grid">
+
+    <!-- A: 左上角紅色書籤飄帶 -->
+    <section class="sample sample-a">
+      <span class="sample-label">A · 紅色書籤飄帶</span>
+      <p class="sample-desc">從卡片左上角垂下一條紅色飄帶，中文「急」字大而清楚，最像手帳貼的紙標籤。邊框改細實線避免視覺擁擠。</p>
+      <div class="demo-card">
+        <div class="mark-a">急</div>
+        <div class="cat-head">
+          <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+          記得確認
+          <span class="cat-count">0/3</span>
+          <svg class="cat-pencil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
+        </div>
+        <div class="item"><span class="box"></span>網路卡</div>
+        <div class="item"><span class="box"></span>海外信用卡確定</div>
+        <div class="item"><span class="box"></span>護照</div>
+      </div>
+    </section>
+
+    <!-- B: 標題左側警告徽章 -->
+    <section class="sample sample-b">
+      <span class="sample-label">B · 標題警告徽章</span>
+      <p class="sample-desc">拿掉角落印章，把「！」做成紅色圓徽章放標題前，搭配紅色虛線邊框。最乾淨、資訊最好讀。</p>
+      <div class="demo-card">
+        <div class="cat-head">
+          <span class="mark-b">！</span>
+          <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+          記得確認
+          <span class="cat-count">0/3</span>
+          <svg class="cat-pencil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
+        </div>
+        <div class="item"><span class="box"></span>網路卡</div>
+        <div class="item"><span class="box"></span>海外信用卡確定</div>
+        <div class="item"><span class="box"></span>護照</div>
+      </div>
+    </section>
+
+    <!-- C: 圓形印章（中文） -->
+    <section class="sample sample-c">
+      <span class="sample-label">C · 圓形中文印章</span>
+      <p class="sample-desc">維持右上角位置改成圓形印泥章，中文「急」字比 URGENT 大一倍清晰好認，最有旅行手帳郵戳感。</p>
+      <div class="demo-card">
+        <div class="mark-c">急</div>
+        <div class="cat-head">
+          <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+          記得確認
+          <span class="cat-count">0/3</span>
+          <svg class="cat-pencil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
+        </div>
+        <div class="item"><span class="box"></span>網路卡</div>
+        <div class="item"><span class="box"></span>海外信用卡確定</div>
+        <div class="item"><span class="box"></span>護照</div>
+      </div>
+    </section>
+
+  </div>
+
+  <a class="nav-back" href="../index.html">← 回到主 App</a>
+</body>
+</html>

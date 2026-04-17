@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>字型風格預覽</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper-bg: #FAF6EB;
+    --paper-fold: #F3EBD8;
+    --card-bg: #FFFCF4;
+    --ink: #2A2E33;
+    --ink-faint: #8B8578;
+    --sky: #7EC8E3;
+    --sun: #F4C869;
+    --leaf: #6B9B6E;
+    --sunset: #C85C5C;
+    --border-soft: #E8DFC9;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper-bg);
+    color: var(--ink);
+    padding: 24px 16px 80px;
+    min-height: 100vh;
+  }
+  .page-title {
+    text-align: center;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 18px;
+    color: var(--ink-faint);
+    margin-bottom: 24px;
+    letter-spacing: 2px;
+  }
+  .preview-grid {
+    display: grid;
+    gap: 28px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  @media (min-width: 960px) {
+    .preview-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .sample {
+    background: var(--card-bg);
+    border: 1px solid var(--border-soft);
+    border-radius: 18px;
+    padding: 20px 18px;
+    box-shadow: 0 2px 10px rgba(120, 90, 50, 0.08);
+  }
+  .sample-label {
+    display: inline-block;
+    background: var(--sun);
+    color: var(--ink);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  .sample-desc {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--ink-faint);
+    margin-bottom: 18px;
+    line-height: 1.6;
+  }
+
+  /* Mini Header */
+  .mini-header {
+    background: linear-gradient(180deg, var(--paper-fold), var(--card-bg));
+    border: 1px dashed var(--border-soft);
+    border-radius: 14px;
+    padding: 14px 16px 12px;
+    margin-bottom: 16px;
+  }
+  .mini-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .mini-progress-track {
+    height: 8px;
+    background: #CFE6F2;
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+  }
+  .mini-progress-fill {
+    width: 62%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--sky), var(--sun));
+    border-radius: 999px;
+  }
+  .mini-progress-text {
+    font-size: 12px;
+    color: var(--ink-faint);
+    margin-top: 6px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Category card */
+  .mini-cat {
+    background: var(--card-bg);
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 16px;
+    transform: rotate(-0.4deg);
+  }
+  .mini-cat-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--border-soft);
+  }
+  .mini-cat-icon { font-size: 18px; }
+  .mini-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 15px;
+  }
+  .mini-box {
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid var(--ink-faint);
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mini-box.checked {
+    background: var(--sun);
+    border-color: var(--sun);
+    color: var(--leaf);
+    font-weight: 700;
+  }
+  .mini-item.checked .mini-text {
+    color: var(--ink-faint);
+    text-decoration: line-through;
+  }
+
+  /* Modal snippet */
+  .mini-modal {
+    background: var(--paper-fold);
+    border: 1px dashed var(--border-soft);
+    border-radius: 14px;
+    padding: 14px;
+  }
+  .mini-modal-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .mini-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1.5px solid var(--border-soft);
+    padding: 8px 2px;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .mini-btn {
+    display: inline-block;
+    padding: 8px 18px;
+    background: var(--sun);
+    color: var(--ink);
+    border: none;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 12px;
+    cursor: pointer;
+  }
+
+  /* ========== Style A: 全手寫 ========== */
+  .style-a,
+  .style-a .mini-title,
+  .style-a .mini-cat-head,
+  .style-a .mini-modal-title,
+  .style-a .mini-text,
+  .style-a .mini-input,
+  .style-a .mini-btn,
+  .style-a .mini-progress-text {
+    font-family: 'LXGW WenKai TC', 'Noto Sans TC', sans-serif;
+  }
+
+  /* ========== Style B: 手寫 + 襯線 ========== */
+  .style-b .mini-title,
+  .style-b .mini-cat-head,
+  .style-b .mini-modal-title {
+    font-family: 'LXGW WenKai TC', sans-serif;
+  }
+  .style-b,
+  .style-b .mini-text,
+  .style-b .mini-input,
+  .style-b .mini-btn,
+  .style-b .mini-progress-text {
+    font-family: 'Noto Serif TC', serif;
+  }
+
+  /* ========== Style C: 全襯線 ========== */
+  .style-c,
+  .style-c .mini-title,
+  .style-c .mini-cat-head,
+  .style-c .mini-modal-title,
+  .style-c .mini-text,
+  .style-c .mini-input,
+  .style-c .mini-btn,
+  .style-c .mini-progress-text {
+    font-family: 'Noto Serif TC', serif;
+  }
+
+  .nav-back {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--ink);
+    color: var(--paper-bg);
+    text-decoration: none;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  }
+</style>
+</head>
+<body>
+  <h1 class="page-title">字型風格預覽 · 3 選 1</h1>
+
+  <div class="preview-grid">
+
+    <!-- A: 全手寫 -->
+    <section class="sample style-a">
+      <span class="sample-label">A · 全手寫</span>
+      <p class="sample-desc">全部使用 LXGW WenKai TC，最貼近旅行手帳的溫度，整體最具個性。</p>
+
+      <div class="mini-header">
+        <div class="mini-title">出國行李清單</div>
+        <div class="mini-progress-track"><div class="mini-progress-fill"></div></div>
+        <div class="mini-progress-text">8 / 13</div>
+      </div>
+
+      <div class="mini-cat">
+        <div class="mini-cat-head"><span class="mini-cat-icon">🎫</span>證件與文件</div>
+        <div class="mini-item checked"><span class="mini-box checked">✓</span><span class="mini-text">護照（有效期限 6 個月以上）</span></div>
+        <div class="mini-item checked"><span class="mini-box checked">✓</span><span class="mini-text">機票／電子登機證</span></div>
+        <div class="mini-item"><span class="mini-box"></span><span class="mini-text">旅遊保險保單</span></div>
+      </div>
+
+      <div class="mini-modal">
+        <div class="mini-modal-title">新增分類</div>
+        <input class="mini-input" value="登山裝備">
+        <button class="mini-btn">新增</button>
+      </div>
+    </section>
+
+    <!-- B: 手寫 + 襯線 -->
+    <section class="sample style-b">
+      <span class="sample-label">B · 手寫 + 襯線</span>
+      <p class="sample-desc">標題 LXGW WenKai TC、內文 Noto Serif TC，手帳溫度 + 書卷質感，我的推薦。</p>
+
+      <div class="mini-header">
+        <div class="mini-title">出國行李清單</div>
+        <div class="mini-progress-track"><div class="mini-progress-fill"></div></div>
+        <div class="mini-progress-text">8 / 13</div>
+      </div>
+
+      <div class="mini-cat">
+        <div class="mini-cat-head"><span class="mini-cat-icon">🎫</span>證件與文件</div>
+        <div class="mini-item checked"><span class="mini-box checked">✓</span><span class="mini-text">護照（有效期限 6 個月以上）</span></div>
+        <div class="mini-item checked"><span class="mini-box checked">✓</span><span class="mini-text">機票／電子登機證</span></div>
+        <div class="mini-item"><span class="mini-box"></span><span class="mini-text">旅遊保險保單</span></div>
+      </div>
+
+      <div class="mini-modal">
+        <div class="mini-modal-title">新增分類</div>
+        <input class="mini-input" value="登山裝備">
+        <button class="mini-btn">新增</button>
+      </div>
+    </section>
+
+    <!-- C: 全襯線 -->
+    <section class="sample style-c">
+      <span class="sample-label">C · 全襯線</span>
+      <p class="sample-desc">全部使用 Noto Serif TC，收斂成「紙本書」質感，統一感最強、最正式。</p>
+
+      <div class="mini-header">
+        <div class="mini-title">出國行李清單</div>
+        <div class="mini-progress-track"><div class="mini-progress-fill"></div></div>
+        <div class="mini-progress-text">8 / 13</div>
+      </div>
+
+      <div class="mini-cat">
+        <div class="mini-cat-head"><span class="mini-cat-icon">🎫</span>證件與文件</div>
+        <div class="mini-item checked"><span class="mini-box checked">✓</span><span class="mini-text">護照（有效期限 6 個月以上）</span></div>
+        <div class="mini-item checked"><span class="mini-box checked">✓</span><span class="mini-text">機票／電子登機證</span></div>
+        <div class="mini-item"><span class="mini-box"></span><span class="mini-text">旅遊保險保單</span></div>
+      </div>
+
+      <div class="mini-modal">
+        <div class="mini-modal-title">新增分類</div>
+        <input class="mini-input" value="登山裝備">
+        <button class="mini-btn">新增</button>
+      </div>
+    </section>
+
+  </div>
+
+  <a class="nav-back" href="index.html">← 回到主 App</a>
+</body>
+</html>
