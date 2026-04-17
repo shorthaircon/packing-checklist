@@ -59,9 +59,7 @@ const DEFAULT_DATA = {
       name: "一些 Extra",
       color: "yellow",
       items: [
-        "小剪刀",
         "便攜小包",
-        "萬國轉接頭",
         "L 夾"
       ]
     },
