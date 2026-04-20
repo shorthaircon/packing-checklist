@@ -11,3 +11,6 @@ Thumbs.db
 
 # Node (just in case)
 node_modules/
+
+# Dev artifacts (preview screenshots, not deployed)
+preview/

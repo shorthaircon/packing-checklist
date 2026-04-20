@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>Icon 設計提案 — 出國行李清單</title>
+<style>
+  body {
+    margin: 0;
+    padding: 32px;
+    background: #F3EBD8;
+    font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+    color: #2A2E33;
+  }
+  h1 { font-size: 22px; margin: 0 0 8px; }
+  .lead { color: #8B8578; margin-bottom: 32px; }
+  .concepts { display: grid; gap: 32px; }
+  .concept {
+    background: #FFFCF4;
+    border: 1px dashed #D9CEB3;
+    border-radius: 18px;
+    padding: 24px;
+  }
+  .concept-title { font-size: 18px; margin: 0 0 4px; }
+  .concept-desc { color: #8B8578; font-size: 14px; margin: 0 0 20px; }
+  .sizes { display: flex; align-items: flex-end; gap: 32px; flex-wrap: wrap; }
+  .size {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .size-label { font-size: 12px; color: #8B8578; }
+  .icon-frame {
+    background: repeating-conic-gradient(#E8DFC9 0% 25%, transparent 0% 50%) 50% / 16px 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    line-height: 0;
+  }
+  .icon-60   { width: 60px;  height: 60px; }
+  .icon-120  { width: 120px; height: 120px; }
+  .icon-180  { width: 180px; height: 180px; }
+  .icon-512  { width: 256px; height: 256px; }
+  .pros-cons {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    font-size: 13px;
+  }
+  .pros, .cons { padding: 12px; border-radius: 10px; }
+  .pros { background: #E8F5E9; }
+  .cons { background: #FCE4EC; }
+  .pros strong, .cons strong { display: block; margin-bottom: 4px; }
+  .vote {
+    margin-top: 24px;
+    padding: 24px;
+    background: #FFFCF4;
+    border: 2px solid #C85C5C;
+    border-radius: 14px;
+    text-align: center;
+  }
+  .vote h2 { margin: 0 0 8px; }
+</style>
+</head>
+<body>
+
+<h1>App Icon 設計提案</h1>
+<p class="lead">3 個方向，每個都顯示 60px（手機桌面實際大小）/ 120px / 180px（iOS）/ 512px。回覆 A、B 或 C。</p>
+
+<div class="concepts">
+
+<!-- =========================================
+     Concept A：行李箱 + 打勾
+     ========================================= -->
+<section class="concept">
+  <h2 class="concept-title">A · 行李箱 + 打勾</h2>
+  <p class="concept-desc">直球拳：行李箱主視覺，蓋上一個天空藍打勾貼紙。「打包清單」訊息最直接，60px 也能秒懂。</p>
+
+  <div class="sizes">
+    <div class="size"><div class="icon-frame icon-60">
+      <svg viewBox="0 0 512 512" width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+        <rect width="512" height="512" rx="100" fill="#FAF6EB"/>
+        <rect x="206" y="96" width="100" height="56" rx="20" fill="none" stroke="#2A2E33" stroke-width="14"/>
+        <rect x="112" y="148" width="288" height="276" rx="32" fill="#2A2E33"/>
+        <line x1="120" y1="246" x2="392" y2="246" stroke="#FAF6EB" stroke-width="6" stroke-dasharray="10 8"/>
+        <line x1="120" y1="338" x2="392" y2="338" stroke="#FAF6EB" stroke-width="6" stroke-dasharray="10 8"/>
+        <circle cx="338" cy="200" r="44" fill="#7EC8E3"/>
+        <path d="M 318 202 Q 326 212 332 220 Q 344 200 358 188" stroke="#FAF6EB" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </div><div class="size-label">60px 桌面</div></div>
+
+    <div class="size"><div class="icon-frame icon-120">
+      <svg viewBox="0 0 512 512" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+        <rect width="512" height="512" rx="100" fill="#FAF6EB"/>
+        <rect x="206" y="96" width="100" height="56" rx="20" fill="none" stroke="#2A2E33" stroke-width="14"/>
+        <rect x="112" y="148" width="288" height="276" rx="32" fill="#2A2E33"/>
+        <line x1="120" y1="246" x2="392" y2="246" stroke="#FAF6EB" stroke-width="6" stroke-dasharray="10 8"/>
+        <line x1="120" y1="338" x2="392" y2="338" stroke="#FAF6EB" stroke-width="6" stroke-dasharray="10 8"/>
+        <circle cx="338" cy="200" r="44" fill="#7EC8E3"/>
+        <path d="M 318 202 Q 326 212 332 220 Q 344 200 358 188" stroke="#FAF6EB" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </div><div class="size-label">120px</div></div>
+
+    <div class="size"><div class="icon-frame icon-180">
+      <svg viewBox="0 0 512 512" width="180" height="180" xmlns="http://www.w3.org/2000/svg">
+        <rect width="512" height="512" rx="100" fill="#FAF6EB"/>
+        <rect x="206" y="96" width="100" height="56" rx="20" fill="none" stroke="#2A2E33" stroke-width="14"/>
+        <rect x="112" y="148" width="288" height="276" rx="32" fill="#2A2E33"/>
+        <line x1="120" y1="246" x2="392" y2="246" stroke="#FAF6EB" stroke-width="6" stroke-dasharray="10 8"/>
+        <line x1="120" y1="338" x2="392" y2="338" stroke="#FAF6EB" stroke-width="6" stroke-dasharray="10 8"/>
+        <circle cx="338" cy="200" r="44" fill="#7EC8E3"/>
+        <path d="M 318 202 Q 326 212 332 220 Q 344 200 358 188" stroke="#FAF6EB" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </div><div class="size-label">180px iOS</div></div>
+
+    <div class="size"><div class="icon-frame icon-512">
+      <svg viewBox="0 0 512 512" width="256" height="256" xmlns="http://www.w3.org/2000/svg">
+        <rect width="512" height="512" rx="100" fill="#FAF6EB"/>
+        <rect x="206" y="96" width="100" height="56" rx="20" fill="none" stroke="#2A2E33" stroke-width="14"/>
+        <rect x="112" y="148" width="288" height="276" rx="32" fill="#2A2E33"/>
+        <line x1="120" y1="246" x2="392" y2="246" stroke="#FAF6EB" stroke-width="6" stroke-dasharray="10 8"/>
+        <line x1="120" y1="338" x2="392" y2="338" stroke="#FAF6EB" stroke-width="6" stroke-dasharray="10 8"/>
+        <circle cx="338" cy="200" r="44" fill="#7EC8E3"/>
+        <path d="M 318 202 Q 326 212 332 220 Q 344 200 358 188" stroke="#FAF6EB" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </div><div class="size-label">512px 大尺寸</div></div>
+  </div>
+
+  <div class="pros-cons">
+    <div class="pros"><strong>適合</strong>「打包清單」訊息最直接，60px 容易辨識。</div>
+    <div class="cons"><strong>取捨</strong>視覺較重、較工具感，少一點旅行手帳的詩意。</div>
+  </div>
+</section>
+
+
+<!-- =========================================
+     Concept B：紙飛機 + 雲（旅行手帳感）
+     ========================================= -->
+<section class="concept">
+  <h2 class="concept-title">B · 紙飛機 + 雲</h2>
+  <p class="concept-desc">延續 App 內的紙飛機視覺，搭配淡雲與夕陽紅小徽章。手帳感最強、最有「旅行的期待」氛圍。</p>
+
+  <div class="sizes">
+    <div class="size"><div class="icon-frame icon-60">
+      <svg viewBox="0 0 512 512" width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+        <rect width="512" height="512" rx="100" fill="#FAF6EB"/>
+        <path d="M 70 360 Q 90 320 140 320 Q 150 280 200 290 Q 220 250 270 280 Q 300 270 320 320 Q 360 320 360 360 Q 360 380 330 380 L 100 380 Q 70 380 70 360 Z" fill="#FFFFFF" opacity="0.85"/>
+        <path d="M 60 130 L 460 60 L 320 420 L 250 280 L 60 130 Z" fill="#FFFCF4" stroke="#2A2E33" stroke-width="14" stroke-linejoin="round"/>
+        <path d="M 250 280 L 460 60" stroke="#2A2E33" stroke-width="10" fill="none"/>
+        <path d="M 60 130 L 250 280 L 320 420" stroke="#2A2E33" stroke-width="10" fill="none" opacity="0.4"/>
+        <path d="M 80 440 Q 200 410 380 440" stroke="#C85C5C" stroke-width="8" stroke-linecap="round" stroke-dasharray="3 12" fill="none"/>
+      </svg>
+    </div><div class="size-label">60px 桌面</div></div>
+
+    <div class="size"><div class="icon-frame icon-120">
+      <svg viewBox="0 0 512 512" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+        <rect width="512" height="512" rx="100" fill="#FAF6EB"/>
+        <path d="M 70 360 Q 90 320 140 320 Q 150 280 200 290 Q 220 250 270 280 Q 300 270 320 320 Q 360 320 360 360 Q 360 380 330 380 L 100 380 Q 70 380 70 360 Z" fill="#FFFFFF" opacity="0.85"/>
+        <path d="M 60 130 L 460 60 L 320 420 L 250 280 L 60 130 Z" fill="#FFFCF4" stroke="#2A2E33" stroke-width="14" stroke-linejoin="round"/>
+        <path d="M 250 280 L 460 60" stroke="#2A2E33" stroke-width="10" fill="none"/>
+        <path d="M 60 130 L 250 280 L 320 420" stroke="#2A2E33" stroke-width="10" fill="none" opacity="0.4"/>
+        <path d="M 80 440 Q 200 410 380 440" stroke="#C85C5C" stroke-width="8" stroke-linecap="round" stroke-dasharray="3 12" fill="none"/>
+      </svg>
+    </div><div class="size-label">120px</div></div>
+
+    <div class="size"><div class="icon-frame icon-180">
+      <svg viewBox="0 0 512 512" width="180" height="180" xmlns="http://www.w3.org/2000/svg">
+        <rect width="512" height="512" rx="100" fill="#FAF6EB"/>
+        <path d="M 70 360 Q 90 320 140 320 Q 150 280 200 290 Q 220 250 270 280 Q 300 270 320 320 Q 360 320 360 360 Q 360 380 330 380 L 100 380 Q 70 380 70 360 Z" fill="#FFFFFF" opacity="0.85"/>
+        <path d="M 60 130 L 460 60 L 320 420 L 250 280 L 60 130 Z" fill="#FFFCF4" stroke="#2A2E33" stroke-width="14" stroke-linejoin="round"/>
+        <path d="M 250 280 L 460 60" stroke="#2A2E33" stroke-width="10" fill="none"/>
+        <path d="M 60 130 L 250 280 L 320 420" stroke="#2A2E33" stroke-width="10" fill="none" opacity="0.4"/>
+        <path d="M 80 440 Q 200 410 380 440" stroke="#C85C5C" stroke-width="8" stroke-linecap="round" stroke-dasharray="3 12" fill="none"/>
+      </svg>
+    </div><div class="size-label">180px iOS</div></div>
+
+    <div class="size"><div class="icon-frame icon-512">
+      <svg viewBox="0 0 512 512" width="256" height="256" xmlns="http://www.w3.org/2000/svg">
+        <rect width="512" height="512" rx="100" fill="#FAF6EB"/>
+        <path d="M 70 360 Q 90 320 140 320 Q 150 280 200 290 Q 220 250 270 280 Q 300 270 320 320 Q 360 320 360 360 Q 360 380 330 380 L 100 380 Q 70 380 70 360 Z" fill="#FFFFFF" opacity="0.85"/>
+        <path d="M 60 130 L 460 60 L 320 420 L 250 280 L 60 130 Z" fill="#FFFCF4" stroke="#2A2E33" stroke-width="14" stroke-linejoin="round"/>
+        <path d="M 250 280 L 460 60" stroke="#2A2E33" stroke-width="10" fill="none"/>
+        <path d="M 60 130 L 250 280 L 320 420" stroke="#2A2E33" stroke-width="10" fill="none" opacity="0.4"/>
+        <path d="M 80 440 Q 200 410 380 440" stroke="#C85C5C" stroke-width="8" stroke-linecap="round" stroke-dasharray="3 12" fill="none"/>
+      </svg>
+    </div><div class="size-label">512px 大尺寸</div></div>
+  </div>
+
+  <div class="pros-cons">
+    <div class="pros"><strong>適合</strong>旅行手帳氛圍最強，跟 App 內飛機進度條呼應，最美。</div>
+    <div class="cons"><strong>取捨</strong>沒明說「清單」，純看 icon 不會聯想到打包功能。</div>
+  </div>
+</section>
+
+
+<!-- =========================================
+     Concept C：護照 + 蓋章
+     ========================================= -->
+<section class="concept">
+  <h2 class="concept-title">C · 護照 + 蓋章</h2>
+  <p class="concept-desc">深色護照本，封面蓋一個夕陽紅的圓形橡皮章（內含飛機 + 打勾）。手帳感與功能性的折衷。</p>
+
+  <div class="sizes">
+    <div class="size"><div class="icon-frame icon-60">
+      <svg viewBox="0 0 512 512" width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+        <rect width="512" height="512" rx="100" fill="#FAF6EB"/>
+        <rect x="120" y="80" width="272" height="352" rx="20" fill="#2A2E33"/>
+        <rect x="140" y="100" width="232" height="312" rx="14" fill="none" stroke="#FAF6EB" stroke-width="3" opacity="0.4"/>
+        <text x="256" y="170" text-anchor="middle" fill="#F4C869" font-family="serif" font-size="32" font-weight="700" letter-spacing="2">PASSPORT</text>
+        <circle cx="256" cy="290" r="80" fill="none" stroke="#C85C5C" stroke-width="10" stroke-dasharray="6 4" opacity="0.95"/>
+        <path d="M 200 296 L 312 270 L 280 318 L 264 296 L 200 296 Z" fill="#C85C5C"/>
+        <path d="M 230 348 Q 240 358 250 366 Q 268 348 286 332" stroke="#C85C5C" stroke-width="8" stroke-linecap="round" fill="none"/>
+      </svg>
+    </div><div class="size-label">60px 桌面</div></div>
+
+    <div class="size"><div class="icon-frame icon-120">
+      <svg viewBox="0 0 512 512" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+        <rect width="512" height="512" rx="100" fill="#FAF6EB"/>
+        <rect x="120" y="80" width="272" height="352" rx="20" fill="#2A2E33"/>
+        <rect x="140" y="100" width="232" height="312" rx="14" fill="none" stroke="#FAF6EB" stroke-width="3" opacity="0.4"/>
+        <text x="256" y="170" text-anchor="middle" fill="#F4C869" font-family="serif" font-size="32" font-weight="700" letter-spacing="2">PASSPORT</text>
+        <circle cx="256" cy="290" r="80" fill="none" stroke="#C85C5C" stroke-width="10" stroke-dasharray="6 4" opacity="0.95"/>
+        <path d="M 200 296 L 312 270 L 280 318 L 264 296 L 200 296 Z" fill="#C85C5C"/>
+        <path d="M 230 348 Q 240 358 250 366 Q 268 348 286 332" stroke="#C85C5C" stroke-width="8" stroke-linecap="round" fill="none"/>
+      </svg>
+    </div><div class="size-label">120px</div></div>
+
+    <div class="size"><div class="icon-frame icon-180">
+      <svg viewBox="0 0 512 512" width="180" height="180" xmlns="http://www.w3.org/2000/svg">
+        <rect width="512" height="512" rx="100" fill="#FAF6EB"/>
+        <rect x="120" y="80" width="272" height="352" rx="20" fill="#2A2E33"/>
+        <rect x="140" y="100" width="232" height="312" rx="14" fill="none" stroke="#FAF6EB" stroke-width="3" opacity="0.4"/>
+        <text x="256" y="170" text-anchor="middle" fill="#F4C869" font-family="serif" font-size="32" font-weight="700" letter-spacing="2">PASSPORT</text>
+        <circle cx="256" cy="290" r="80" fill="none" stroke="#C85C5C" stroke-width="10" stroke-dasharray="6 4" opacity="0.95"/>
+        <path d="M 200 296 L 312 270 L 280 318 L 264 296 L 200 296 Z" fill="#C85C5C"/>
+        <path d="M 230 348 Q 240 358 250 366 Q 268 348 286 332" stroke="#C85C5C" stroke-width="8" stroke-linecap="round" fill="none"/>
+      </svg>
+    </div><div class="size-label">180px iOS</div></div>
+
+    <div class="size"><div class="icon-frame icon-512">
+      <svg viewBox="0 0 512 512" width="256" height="256" xmlns="http://www.w3.org/2000/svg">
+        <rect width="512" height="512" rx="100" fill="#FAF6EB"/>
+        <rect x="120" y="80" width="272" height="352" rx="20" fill="#2A2E33"/>
+        <rect x="140" y="100" width="232" height="312" rx="14" fill="none" stroke="#FAF6EB" stroke-width="3" opacity="0.4"/>
+        <text x="256" y="170" text-anchor="middle" fill="#F4C869" font-family="serif" font-size="32" font-weight="700" letter-spacing="2">PASSPORT</text>
+        <circle cx="256" cy="290" r="80" fill="none" stroke="#C85C5C" stroke-width="10" stroke-dasharray="6 4" opacity="0.95"/>
+        <path d="M 200 296 L 312 270 L 280 318 L 264 296 L 200 296 Z" fill="#C85C5C"/>
+        <path d="M 230 348 Q 240 358 250 366 Q 268 348 286 332" stroke="#C85C5C" stroke-width="8" stroke-linecap="round" fill="none"/>
+      </svg>
+    </div><div class="size-label">512px 大尺寸</div></div>
+  </div>
+
+  <div class="pros-cons">
+    <div class="pros"><strong>適合</strong>「出國」訊息最強，手帳橡皮章呼應風格，質感最佳。</div>
+    <div class="cons"><strong>取捨</strong>60px 文字會糊；元素較多，視覺密度較高。</div>
+  </div>
+</section>
+
+</div>
+
+<div class="vote">
+  <h2>請挑一個方向</h2>
+  <p>回覆 Claude：<strong>A</strong> / <strong>B</strong> / <strong>C</strong>，或告訴我要怎麼調整。</p>
+</div>
+
+</body>
+</html>
