@@ -1,4 +1,4 @@
-const VERSION = 'v1';
+const VERSION = 'v3';
 const CORE_CACHE = `packing-core-${VERSION}`;
 const FONT_CACHE = `packing-fonts-${VERSION}`;
 

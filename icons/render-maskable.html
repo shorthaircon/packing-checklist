@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8"><style>
-html,body{margin:0;padding:0;width:512px;height:512px;background:#FAF6EB;overflow:hidden}
+html,body{margin:0;padding:0;width:512px;height:512px;background:#7EC8E3;overflow:hidden}
 svg{width:512px;height:512px;display:block;position:absolute;top:0;left:0}
 </style></head><body>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" fill="#FAF6EB"/>
-  <g transform="translate(51.2 51.2) scale(0.8)">
-    <rect x="120" y="80" width="272" height="352" rx="20" fill="#2A2E33"/>
-    <rect x="140" y="100" width="232" height="312" rx="14" fill="none" stroke="#FAF6EB" stroke-width="3" opacity="0.4"/>
-    <text x="256" y="170" text-anchor="middle" fill="#F4C869" font-family="serif" font-size="32" font-weight="700" letter-spacing="2">PASSPORT</text>
-    <circle cx="256" cy="290" r="80" fill="none" stroke="#C85C5C" stroke-width="10" stroke-dasharray="6 4" opacity="0.95"/>
-    <path d="M 200 296 L 312 270 L 280 318 L 264 296 L 200 296 Z" fill="#C85C5C"/>
-    <path d="M 230 348 Q 240 358 250 366 Q 268 348 286 332" stroke="#C85C5C" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <rect width="512" height="512" fill="#7EC8E3"/>
+  <defs><clipPath id="body"><rect x="156" y="104" width="200" height="280" rx="24"/></clipPath></defs>
+  <path d="M 226 106 V 96 Q 226 84 238 84 H 274 Q 286 84 286 96 V 106" fill="none" stroke="#C98A4B" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="196" cy="402" r="18" fill="#2A2E33"/>
+  <circle cx="316" cy="402" r="18" fill="#2A2E33"/>
+  <rect x="156" y="104" width="200" height="280" rx="24" fill="#FFFCF4"/>
+  <g clip-path="url(#body)" fill="#C98A4B">
+    <path d="M156 104 H202 V116 A34 34 0 0 0 168 150 H156 Z"/>
+    <path d="M356 104 H310 V116 A34 34 0 0 1 344 150 H356 Z"/>
+    <path d="M156 384 H202 V372 A34 34 0 0 1 168 338 H156 Z"/>
+    <path d="M356 384 H310 V372 A34 34 0 0 0 344 338 H356 Z"/>
+    <rect x="156" y="168" width="200" height="22"/>
+    <rect x="156" y="298" width="200" height="22"/>
+  </g>
+  <g fill="#C98A4B" stroke="#FFFCF4" stroke-width="6">
+    <rect x="190" y="152" width="28" height="54" rx="12"/>
+    <rect x="294" y="152" width="28" height="54" rx="12"/>
+    <rect x="190" y="282" width="28" height="54" rx="12"/>
+    <rect x="294" y="282" width="28" height="54" rx="12"/>
   </g>
 </svg>
 </body></html>

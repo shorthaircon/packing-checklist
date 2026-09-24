@@ -28,6 +28,13 @@
   const btnFinalCheck = document.getElementById("btn-final-check");
   const btnFinalExit = document.getElementById("btn-final-exit");
   const finalBanner = document.getElementById("final-check-banner");
+  const appHeader = document.querySelector(".app-header");
+  const btnListMenu = document.getElementById("btn-list-menu");
+  const listTitle = document.getElementById("list-title");
+  const listMenu = document.getElementById("list-menu");
+  const listMenuItems = document.getElementById("list-menu-items");
+  const listMenuBackdrop = document.getElementById("list-menu-backdrop");
+  const btnListAdd = document.getElementById("btn-list-add");
 
   const modalManage = document.getElementById("modal-manage-categories");
   const manageList = document.getElementById("manage-list");
@@ -46,7 +53,8 @@
   const btnCatCancel = document.getElementById("btn-cat-cancel");
   const btnCatConfirm = document.getElementById("btn-cat-confirm");
 
-  let state = load();
+  let store = load();
+  let state = activeList();
   let selectedIcon = ICON_OPTIONS[0];
   let currentEditCat = null;
 
@@ -90,7 +98,7 @@
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const data = JSON.parse(raw);
-        if (data && Array.isArray(data.categories)) return migrate(data);
+        if (data && (Array.isArray(data.categories) || Array.isArray(data.lists))) return migrate(data);
       }
     } catch (e) {
       console.warn("載入失敗，改用預設資料", e);
@@ -114,8 +122,20 @@
       });
       data.version = 3;
     }
+    if (from < 4) {
+      data = wrapAsFirstList(data.categories);
+    }
     if (from < data.version) localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     return data;
+  }
+
+  function wrapAsFirstList(categories) {
+    const id = uid("list");
+    return { version: 4, activeListId: id, lists: [{ id, name: "出國行李清單", categories }] };
+  }
+
+  function activeList() {
+    return store.lists.find((l) => l.id === store.activeListId) || store.lists[0];
   }
 
   function seedFromDefault() {
@@ -127,15 +147,16 @@
       important: !!c.important,
       items: c.items.map((text) => ({ id: uid("item"), text, checked: false }))
     }));
-    return { version: 3, categories };
+    return wrapAsFirstList(categories);
   }
 
   function save() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
   }
 
   /* ---------- Main board render ---------- */
   function render() {
+    listTitle.textContent = state.name;
     board.innerHTML = "";
     state.categories.forEach((cat) => board.appendChild(renderCategory(cat)));
     updateProgress();
@@ -241,12 +262,17 @@
     if (allChecked && !wasComplete) spawnCloud(section);
   }
 
-  function updateProgress() {
+  function listProgress(list) {
     let total = 0, done = 0;
-    state.categories.forEach((c) => {
+    list.categories.forEach((c) => {
       total += c.items.length;
       done += c.items.filter((i) => i.checked).length;
     });
+    return { total, done };
+  }
+
+  function updateProgress() {
+    const { total, done } = listProgress(state);
     progressText.textContent = done + " / " + total;
     const pct = total === 0 ? 0 : (done / total) * 100;
     progressFill.style.width = pct + "%";
@@ -294,6 +320,103 @@
     finalBanner.hidden = !v;
   }
 
+  /* ---------- List switcher menu ---------- */
+  function setListMenu(open) {
+    if (open) {
+      document.documentElement.style.setProperty("--menu-top", appHeader.getBoundingClientRect().bottom + "px");
+      buildListMenu();
+    }
+    listMenu.hidden = listMenuBackdrop.hidden = !open;
+    btnListMenu.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+
+  function buildListMenu() {
+    listMenuItems.innerHTML = "";
+    store.lists.forEach((list) => {
+      const { total, done } = listProgress(list);
+      const li = document.createElement("li");
+      li.className = "list-menu-item" + (list === state ? " active" : "");
+
+      const pick = document.createElement("button");
+      pick.type = "button";
+      pick.className = "list-menu-pick";
+      const name = document.createElement("span");
+      name.className = "list-menu-name";
+      name.textContent = list.name;
+      const prog = document.createElement("span");
+      prog.className = "list-menu-progress";
+      prog.textContent = done + " / " + total;
+      pick.append(name, prog);
+      pick.addEventListener("click", () => switchList(list.id));
+
+      const rename = document.createElement("button");
+      rename.type = "button";
+      rename.className = "list-menu-act";
+      rename.setAttribute("aria-label", "改名");
+      rename.innerHTML = `<i data-lucide="pencil"></i>`;
+      rename.addEventListener("click", () => renameList(list));
+
+      const del = document.createElement("button");
+      del.type = "button";
+      del.className = "list-menu-act danger";
+      del.setAttribute("aria-label", "刪除");
+      del.innerHTML = `<i data-lucide="trash-2"></i>`;
+      del.addEventListener("click", () => deleteList(list));
+
+      li.append(pick, rename, del);
+      listMenuItems.appendChild(li);
+    });
+    if (window.lucide) window.lucide.createIcons();
+  }
+
+  function switchList(id) {
+    if (document.body.classList.contains("final-check")) setFinalCheck(false);
+    store.activeListId = id;
+    state = activeList();
+    const { total, done } = listProgress(state);
+    progressFill.dataset.allDone = total > 0 && done === total ? "true" : "false";
+    save();
+    setListMenu(false);
+    render();
+  }
+
+  function addList() {
+    const name = (prompt("新清單名稱（會複製目前清單，勾選清空）", "") || "").trim();
+    if (!name) return;
+    const categories = state.categories.map((c) => ({
+      ...c,
+      id: uid("cat"),
+      items: c.items.map((i) => ({ id: uid("item"), text: i.text, checked: false }))
+    }));
+    const id = uid("list");
+    store.lists.push({ id, name, categories });
+    switchList(id);
+  }
+
+  function renameList(list) {
+    const name = (prompt("清單名稱", list.name) || "").trim();
+    if (!name || name === list.name) return;
+    list.name = name;
+    save();
+    buildListMenu();
+    if (list === state) listTitle.textContent = name;
+  }
+
+  function deleteList(list) {
+    if (store.lists.length <= 1) {
+      alert("至少要保留一份清單。");
+      return;
+    }
+    if (!confirm("要刪除「" + list.name + "」嗎？這份清單的分類和項目都會一起刪除。")) return;
+    store.lists = store.lists.filter((l) => l !== list);
+    if (list === state) {
+      switchList(store.lists[0].id);
+    } else {
+      save();
+      buildListMenu();
+    }
+  }
+
   /* ---------- Modal history (mobile back button / gesture) ---------- */
   function closeTopModal() {
     if (!modalAddCat.hidden) {
@@ -322,6 +445,7 @@
 
   /* ---------- Manage categories modal ---------- */
   function openManageCategories() {
+    setListMenu(false);
     if (document.body.classList.contains("final-check")) setFinalCheck(false);
     buildManageList();
     modalManage.hidden = false;
@@ -559,7 +683,12 @@
     if (e.key === "Enter") { e.preventDefault(); confirmAddCategory(); }
   });
 
+  btnListMenu.addEventListener("click", () => setListMenu(listMenu.hidden));
+  listMenuBackdrop.addEventListener("click", () => setListMenu(false));
+  btnListAdd.addEventListener("click", addList);
+
   btnFinalCheck.addEventListener("click", () => {
+    setListMenu(false);
     setFinalCheck(!document.body.classList.contains("final-check"));
   });
   btnFinalExit.addEventListener("click", () => setFinalCheck(false));

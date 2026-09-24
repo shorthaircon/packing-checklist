@@ -58,7 +58,10 @@
     </div>
     <div class="header-inner">
       <h1 class="app-title">
-        <span class="app-title-text">出國行李清單</span>
+        <button id="btn-list-menu" class="app-title-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="list-menu">
+          <span id="list-title" class="app-title-text">出國行李清單</span>
+          <i data-lucide="chevron-down" class="app-title-caret"></i>
+        </button>
         <svg class="app-title-underline" aria-hidden="true"><use href="#ico-underline"/></svg>
       </h1>
       <div class="header-actions">
@@ -88,6 +91,13 @@
       <button id="btn-final-exit" type="button" class="banner-exit">結束</button>
     </div>
   </header>
+
+  <div id="list-menu-backdrop" class="list-menu-backdrop" hidden></div>
+  <div id="list-menu" class="list-menu" hidden>
+    <p class="list-menu-label">我的清單</p>
+    <ul id="list-menu-items" class="list-menu-items"></ul>
+    <button id="btn-list-add" class="list-menu-add" type="button">＋ 新增清單<small>複製目前清單，勾選清空</small></button>
+  </div>
 
   <main id="board" class="board"></main>
 
